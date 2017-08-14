@@ -18,7 +18,7 @@ async def on_ready():
     print('------')
 
 @bot.command()
-async def search(player_name = None, num_matches = 2):
+async def search(player_name = None, num_matches = 5):
     """Search for player match history"""
 
     if player_name is None:
@@ -42,7 +42,8 @@ async def search(player_name = None, num_matches = 2):
         search_msg = f"In the last {num_matches} games, Summoner {player_name} has played:\n"
         for single_match in printMatchList:
             single_champ = RiotAPI.convertChampionIDtoName(single_match.champion)
-            search_msg += f"{single_champ} at {single_match.pretty_timestamp()}\n"
+            date, time = single_match.pretty_timestamp().split()
+            search_msg += f"on {date} at {time}: {single_champ} \n"
 
         await bot.say(search_msg)
 
