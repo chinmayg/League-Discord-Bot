@@ -5,7 +5,7 @@ import config
 class RiotAPI(object):
     """ Riot API class is an interface for making calls to the Riot APIs """
     def __init__(self):
-        self.champion_list = json.load(RiotAPI.getChampionJSON())
+        self.champion_list = json.loads(RiotAPI.getChampionJSON())
 
     def convertChampionIDtoName(self, champion_id):
         """ Converts champion id from match history to champion name"""
@@ -44,6 +44,3 @@ class RiotAPI(object):
         playerURL = f"https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/{summoner_name}?api_key={config.riot_token}"
         playerJSON = RiotAPI.__doHTTPGetReq(playerURL)
         return playerJSON
-
-api = RiotAPI()
-print(api.convertChampionIDtoName(19, champJSON))
