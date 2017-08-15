@@ -19,7 +19,7 @@ async def on_ready():
 
 @bot.command()
 async def search(player_name = None, num_matches = 5):
-    """Search for player match history"""
+    """Search for recent player match history"""
 
     if player_name is None:
         await bot.say("Please provide a summoner name/player name.\n See ?help search for usage.")
@@ -29,7 +29,7 @@ async def search(player_name = None, num_matches = 5):
         playerJSON = RiotAPI.getPlayerJSON(player_name)
         summoner.convertPlayerJSONtoPlayer(playerJSON)
 
-        matchJSON = RiotAPI.getMatchJSON(summoner.account_id)
+        matchJSON = RiotAPI.getRecentMatchJSON(summoner.account_id)
         summoner.convertMatchHistJSONtoMatchHistList(matchJSON)
         history = summoner.match_history
 

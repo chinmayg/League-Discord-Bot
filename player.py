@@ -4,14 +4,12 @@ from riot_api import RiotAPI
 
 class Player(object):
     """ Player class represents and stores all of the Summoner data """
-    #Constructor
     def __init__(self, player_name = None, level = None, account_id = None, match_history = None):
         self.player_name = player_name
         self.account_id = account_id
         self.match_history = match_history
         self.level = level
 
-    #Class functions
     def convertPlayerJSONtoPlayer(self, player_json):
         """ Converts Summoner JSON data from Riot"""
         data = json.loads(player_json)

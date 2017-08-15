@@ -3,32 +3,47 @@ import urllib.request
 import config
 
 class RiotAPI(object):
-    def __init__(self, player_name):
-        self.player_name = player_name
+    """ Riot API class is an interface for making calls to the Riot APIs """
+    def __init__(self):
+        self.champion_list = json.load(getChampionJSON())
+
+    def convertChampionIDtoName(self, champion_id):
+        """ Converts champion id from match history to champion name"""
+        champData = self.champion_list['keys']
+        return champData[f'{champion_id}']
 
     @staticmethod
-    def convertChampionIDtoName(champion_id):
-        filename = "json/champion.json"
-        with open(filename, 'r') as f:
-            data = json.load(f)
-            champ_data = data['data']
-            for key in champ_data:
-                details = champ_data[key]
-                if int(details['key']) == champion_id:
-                    return details['id']
-
-    @staticmethod
-    def getMatchJSON(account_id):
-        matchURL = f"https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/{account_id}/recent?api_key={config.riot_token}"
-        req = urllib.request.Request(matchURL)
+    def __doHTTPGetReq(url):
+        req = urllib.request.Request(url)
         resp = urllib.request.urlopen(req)
-        matchJSON = resp.read()
+        return resp.read()
+
+    @staticmethod
+    def getChampionJSON():
+        """ Static method for getting the list of champions in JSON format from Riot API
+            Uses HTTP Get to send request
+        """
+        champURL = f"https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=all&dataById=false&api_key={config.riot_token}"
+        champJSON = __doHTTPGetReq(champURL)
+        return champJSON
+
+    @staticmethod
+    def getRecentMatchJSON(account_id):
+        """ Static method for getting a list of the last 20 matches played in JSON format from Riot API.
+            Uses HTTP Get to send request
+        """
+        matchURL = f"https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/{account_id}/recent?api_key={config.riot_token}"
+        matchJSON = __doHTTPGetReq(matchURL)
         return matchJSON
 
     @staticmethod
     def getPlayerJSON(summoner_name):
+        """ Static method for getting summoner data in JSON formation from Riot API.
+            Uses HTTP Get to send request
+        """
         playerURL = f"https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/{summoner_name}?api_key={config.riot_token}"
-        req = urllib.request.Request(playerURL)
-        resp = urllib.request.urlopen(req)
-        playerJSON = resp.read()
+        playerJSON = __doHTTPGetReq(playerURL)
         return playerJSON
+
+api = RiotAPI()
+print(api.convertChampionIDtoName(19, champJSON))
