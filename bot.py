@@ -25,6 +25,7 @@ async def search(player_name = None, num_matches = 5):
         await bot.say("Please provide a summoner name/player name.\n See ?help search for usage.")
     else:
         summoner = Player()
+        api = RiotAPI()
 
         playerJSON = RiotAPI.getPlayerJSON(player_name)
         summoner.convertPlayerJSONtoPlayer(playerJSON)
@@ -41,7 +42,7 @@ async def search(player_name = None, num_matches = 5):
 
         search_msg = f"In the last {num_matches} games, Summoner {player_name} has played:\n"
         for single_match in printMatchList:
-            single_champ = RiotAPI.convertChampionIDtoName(single_match.champion)
+            single_champ = api.convertChampionIDtoName(single_match.champion)
             date, time = single_match.pretty_timestamp().split()
             search_msg += f"on {date} at {time}: {single_champ} \n"
 
