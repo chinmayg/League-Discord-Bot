@@ -5,7 +5,7 @@ import config
 class RiotAPI(object):
     """ Riot API class is an interface for making calls to the Riot APIs """
     def __init__(self):
-        self.champion_list = json.load(getChampionJSON())
+        self.champion_list = json.load(RiotAPI.getChampionJSON())
 
     def convertChampionIDtoName(self, champion_id):
         """ Converts champion id from match history to champion name"""
@@ -24,7 +24,7 @@ class RiotAPI(object):
             Uses HTTP Get to send request
         """
         champURL = f"https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=all&dataById=false&api_key={config.riot_token}"
-        champJSON = __doHTTPGetReq(champURL)
+        champJSON = RiotAPI.__doHTTPGetReq(champURL)
         return champJSON
 
     @staticmethod
@@ -33,7 +33,7 @@ class RiotAPI(object):
             Uses HTTP Get to send request
         """
         matchURL = f"https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/{account_id}/recent?api_key={config.riot_token}"
-        matchJSON = __doHTTPGetReq(matchURL)
+        matchJSON = RiotAPI.__doHTTPGetReq(matchURL)
         return matchJSON
 
     @staticmethod
@@ -42,7 +42,7 @@ class RiotAPI(object):
             Uses HTTP Get to send request
         """
         playerURL = f"https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/{summoner_name}?api_key={config.riot_token}"
-        playerJSON = __doHTTPGetReq(playerURL)
+        playerJSON = RiotAPI.__doHTTPGetReq(playerURL)
         return playerJSON
 
 api = RiotAPI()
