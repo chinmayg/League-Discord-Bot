@@ -1,0 +1,20 @@
+Design:
+
+Match data
+    * timestamp
+    * lane
+    * champion
+    * role
+    * gameId
+Player data
+    * name
+    * accountId
+    * id
+    * summonerLevel
+    - convertPlayerJSONtoPlayer()
+    - convertMatchHistJSONtoMatchHistList()
+Riot API calls
+    * player_name
+    - convertChampionIDtoName ()
+    - getPlayerJSON ()
+    - getMatchHistoryJSON ()
