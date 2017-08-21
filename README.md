@@ -7,4 +7,4 @@ Currently the bot only has one command "?search summoner_name" with an optional 
 This command will output which champion the player has played in the last 5 matches upto last 20 matches.
 
 Installation:
-Need install the discord.py to run applicaation. Follow the directions from the github repo https://github.com/Rapptz/discord.py.
+Need install the discord.py to run application. Follow the directions from the github repo https://github.com/Rapptz/discord.py.
