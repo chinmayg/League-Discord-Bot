@@ -1,0 +1,11 @@
+Match History Output Design
+
+Queue Type:
+Duration, Date and Time
+<Team 1 Bans>                                 <Team 2 Bans>
+-----------------------------------------------------------
+player 1  champion kda        |        champion kda player 6
+player 2  champion kda        |        champion kda player 7
+player 3  champion kda        |        champion kda player 8
+player 4  champion kda        |        champion kda player 9
+player 5  champion kda        |        champion kda player 10

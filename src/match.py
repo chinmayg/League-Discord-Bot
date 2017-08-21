@@ -1,7 +1,7 @@
 import time
 
 class Match(object):
-    """ This class will hold all information about a LOL match"""
+    """ This class will hold all information about a League of Legends match"""
 
     # Constructor
     def __init__(self, timestamp = None, lane = None, champion = None, role = None, gameId = None):
