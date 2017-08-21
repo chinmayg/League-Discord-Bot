@@ -1,6 +1,6 @@
 Match History Output Design
 
-Queue Type:
+Queue Type: <NORMAL, SPECIAL GAME TYPE, RANKED>
 Duration, Date and Time
 <Team 1 Bans>                                 <Team 2 Bans>
 -----------------------------------------------------------
