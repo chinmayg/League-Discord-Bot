@@ -6,7 +6,7 @@ from riot_api import RiotAPI
 
 description = """
         Hi! I am League bot! I can help you with the following:
-            * Search a player's match history (Default last 2 matches)
+            * Search a player's match history (Default last 5 matches)
         """
 bot = commands.Bot(command_prefix='?', description=description)
 
@@ -16,6 +16,12 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+
+@bot.event
+async def on_message(message):
+    print("Echoing message:", message.mentions[0])
+    if "LeagueBot" in str(message.mentions[0]):
+        await bot.say(f"Hello {message.author.name}")
 
 @bot.command()
 async def search(player_name = None, num_matches = 5):
