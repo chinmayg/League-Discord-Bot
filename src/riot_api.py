@@ -42,7 +42,7 @@ class RiotAPI(object):
         """ Static method for getting the list of champions in JSON format from Riot API
             Uses HTTP Get to send request
         """
-        champURL = RiotAPI.generateURI("champ_list")
+        champURL = RiotAPI.__generateURI("champ_list")
         champJSON = RiotAPI.__doHTTPGetReq(champURL)
         return champJSON
 
@@ -51,7 +51,7 @@ class RiotAPI(object):
         """ Static method for getting a list of the last 20 matches played in JSON format from Riot API.
             Uses HTTP Get to send request
         """
-        matchURL = RiotAPI.generateURI("recent_matchs", account_id)
+        matchURL = RiotAPI.__generateURI("recent_matchs", account_id)
         matchJSON = RiotAPI.__doHTTPGetReq(matchURL)
         return matchJSON
 
@@ -60,7 +60,7 @@ class RiotAPI(object):
         """ Static method for getting a detailed information for the match id provided.
             Uses HTTP Get to send request
         """
-        matchURL = RiotAPI.generateURI("detail_match", match_id)
+        matchURL = RiotAPI.__generateURI("detail_match", match_id)
         matchJSON = RiotAPI.__doHTTPGetReq(matchURL)
         return matchJSON
 
@@ -69,6 +69,6 @@ class RiotAPI(object):
         """ Static method for getting summoner data in JSON formation from Riot API.
             Uses HTTP Get to send request
         """
-        playerURL = RiotAPI.generateURI("player", summoner_name)
+        playerURL = RiotAPI.__generateURI("player", summoner_name)
         playerJSON = RiotAPI.__doHTTPGetReq(playerURL)
         return playerJSON
