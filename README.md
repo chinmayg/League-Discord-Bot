@@ -8,3 +8,9 @@ This command will output which champion the player has played in the last 5 matc
 
 Installation:
 Need install the discord.py to run application. Follow the directions from the github repo https://github.com/Rapptz/discord.py.
+
+Future Features:
+- Champion lookup
+- Match scoreboard
+- Current match information
+- Single summoner match detail 
