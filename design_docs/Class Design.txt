@@ -1,20 +1,45 @@
 Design:
-
-Match data
-    * timestamp
-    * lane
-    * champion
-    * role
-    * gameId
-Player data
-    * name
-    * accountId
-    * id
-    * summonerLevel
+Match data:
+# Member Variables
+    * lane:String
+    * gameId:Int
+    * champion:Int
+    * platformId:String
+    * timestamp:Int
+    * queue:Int
+    * role:String
+    * season:Int
+    * detailed_info:List of Dict ex: [{'player', 'champion', 'kda'},]
+# Function
+    - __parseDetailJSONMatchData()
+    - printScoreboard()
+    - printPlayerDetails()
+    - pretty_timestamp()
+-----------------------------------
+Player data:
+# Member Variables
+    * icon_id:Int
+    * name:String
+    * account_id:Int
+    * summoner_id:Int
+    * summonerLevel:Int
+    * timestamp:Int
+    * match_history:Match Obj List or Dict
+# Function
     - convertPlayerJSONtoPlayer()
     - convertMatchHistJSONtoMatchHistList()
-Riot API calls
-    * player_name
-    - convertChampionIDtoName ()
-    - getPlayerJSON ()
-    - getMatchHistoryJSON ()
+-----------------------------------
+Riot API calls:
+# Member Variables
+    * URI:String Dict
+# Function
+    - convertChampionIDtoName()
+    - __generateURI()
+    - __doHTTPGetReq()
+    - getChampionJSON()
+    - getRecentMatchJSON()
+    - getDetailMatchJSON()
+    - getCurrentMatchJSON()
+    - getPlayerJSON()
+    - getMatchHistoryJSON()
+-----------------------------------

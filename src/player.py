@@ -4,18 +4,24 @@ from riot_api import RiotAPI
 
 class Player(object):
     """ Player class represents and stores all of the Summoner data """
-    def __init__(self, player_name = None, level = None, account_id = None, match_history = None):
+    def __init__(self, icon = None, player_name = None, level = None, account_id = None, match_history = None, summoner_id = None, timestamp = None):
+        self.icon = icon
         self.player_name = player_name
         self.account_id = account_id
-        self.match_history = match_history
+        self.summoner_id = summoner_id
         self.level = level
+        self.timestamp = timestamp
+        self.match_history = match_history
 
     def convertPlayerJSONtoPlayer(self, player_json):
         """ Converts Summoner JSON data from Riot"""
         data = json.loads(player_json)
         self.player_name = data['name']
         self.account_id =  data['accountId']
+        self.summoner_id = data['id']
         self.level = data['summonerLevel']
+        self.icon = data['profileIconId']
+        self.timestamp = data['revisionDate']
 
     def convertMatchHistJSONtoMatchHistList(self, match_history_json):
         """ Converts the match_history JSON data from Riot to list"""
