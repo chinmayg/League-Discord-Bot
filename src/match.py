@@ -11,5 +11,10 @@ class Match(object):
         self.role = role
         self.gameId = gameId
 
+    def pprintScoreboard(self):
+        scoreboard = ""
+
+        return scoreboard
+
     def pretty_timestamp(self):
         return time.strftime('%m-%d-%y %I:%M:%S', time.localtime(self.timestamp/1000))

@@ -41,11 +41,35 @@ async def search(player_name = None, num_matches = 5):
         single_match = printMatchList[1]
 
         search_msg = f"In the last {num_matches} games, Summoner {player_name} has played:\n"
+        count = 1
         for single_match in printMatchList:
             single_champ = api.convertChampionIDtoName(single_match.champion)
             date, time = single_match.pretty_timestamp().split()
-            search_msg += f"on {date} at {time}: {single_champ} \n"
-
+            search_msg += f"#{count}: on {date} at {time}: {single_champ} \n"
+            count++
+        search_msg += "If you want to see detailed scoreboard for a game, use the command \"?detail {player_name} [Game_Number]\""
         await bot.say(search_msg)
+
+@bot.command()
+async def detail(player_name = None, game_num = 1):
+    if player_name is None:
+        await bot.say("Please provide a summoner name/player name.\n See ?help detail for usage.")
+    else:
+        # user will provide a number position that doesnt start at 0, normalize
+        if game_num is 0:
+            game_num = 1
+            
+        summoner = Player()
+        api = RiotAPI()
+
+        playerJSON = RiotAPI.getPlayerJSON(player_name)
+        summoner.convertPlayerJSONtoPlayer(playerJSON)
+
+        matchJSON = RiotAPI.getRecentMatchJSON(summoner.account_id)
+        summoner.convertMatchHistJSONtoMatchHistList(matchJSON)
+        history = summoner.match_history
+
+        scoreboard = summoner.match_history[game_num - 1].printScoreboard()
+        await bot.say(scoreboard)
 
 bot.run(config.discord_token)

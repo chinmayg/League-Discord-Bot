@@ -9,6 +9,7 @@ class RiotAPI(object):
     # Constant dictionary for HTTP Get uri
     URI = {
         "champ_list" : "https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=all&dataById=false&api_key={}",
+        "champ_detail" : "https://na1.api.riotgames.com/lol/static-data/v3/champions/{}?locale=en_US&tags=all&api_key={}"
         "recent_matchs" : "https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/{}/recent?api_key={}",
         "detail_match" : "https://na1.api.riotgames.com/lol/match/v3/matches/{}?api_key={}",
         "player" : "https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/{}?api_key={}",
@@ -48,6 +49,18 @@ class RiotAPI(object):
               Uses HTTP Get to send request
         """
         champURL = RiotAPI.__generateURI("champ_list")
+        champJSON = RiotAPI.__doHTTPGetReq(champURL)
+        return champJSON
+
+    @staticmethod
+    def getChampionJSON(champion_id):
+        """
+        IN: champion_id
+        Out: String - URI
+        Desc: Static method for getting the list of champions in JSON format from Riot API
+              Uses HTTP Get to send request
+        """
+        champURL = RiotAPI.__generateURI("champ_detail")
         champJSON = RiotAPI.__doHTTPGetReq(champURL)
         return champJSON
 
